@@ -1,48 +1,77 @@
-console.log("Welcome to Eric's Converter Palace");
+
 var input;
-var Temp;
+var temp;
+var elFahrButton = document.getElementById("fahrButton");
+var elCelButton = document.getElementById("celButton");
+var choice;
+var answer;
+
+var button = document.getElementById("converter");    // Reference to the button element in the DOM
 
 
-function toCelsius () {
-  Temp = (input - 32) / 1.8;
+function determine () {     //This function should determine which conversion should happen based on which radio button is selected.
+  input = document.getElementById("userInput").value;
+    console.log("INPUT >>>", input);
+  if (elFahrButton.checked === true) {
+    choice = "Fahrenheit";
+    answer = toFahrenheit(input);
+  } else {    //if one is checked the other is not and vice versa
+    choice = "Celsius";
+    answer = toCelsius(input);
+  }
+document.getElementById("results").innerHTML = `Our converted temperature is ${answer}`;
 }
 
-function toFahrenheit () {
-  Temp = input × 1.8 + 32;
+function toFahrenheit (input) {
+  temp = input * 1.8 + 32;
+  console.log("Converted Fahrenheit value is ", temp);
+  return temp;
 }
 
-
-// Get a reference to the button element in the DOM
-var button = document.getElementById("converter");
-
-
-// This function should determine which conversion should
-// happen based on which radio button is selected.
-function determineConverter (clickEvent) {
-  console.log("event", clickEvent);
+function toCelsius (input) {
+  temp = (input - 32) / 1.8;
+  console.log("Converted Celsius value is ", temp);
+  return temp;
 }
 
-
-
-// Assign a function to be executed when the button is clicked
-button.addEventListener("click", determineConverter);
-
-
-
-
-
-if (Temp > 90 || Temp > 32) {  
-// make red
-  document.getElementById("results").innerHTML = `<div style="color:red;">${ ???? + "&deg"}</div>`
-
-
-} else if (temperature < 32 || temperature < 0) {
-// make blue
-  document.getElementById("results").innerHTML = `<div style="color:blue;">${ ???? + "&deg"}</div>`
-
-
-} else {
-//make green
-  document.getElementById("results").innerHTML = `<div style="color:green;">${ ???? + "&deg"}</div>`
-
+function enterKeyPress(event) {
+  // console.log("event", event );
+  if (event.keyCode === 13 ) { 
+    determine();
+  } 
 }
+
+button.addEventListener("click", determine);
+window.addEventListener("keypress", enterKeyPress); 
+
+
+// To see which key is being clicked
+// document.getElementById("userInput").addEventListener("keydown", function(event){
+//   console.log(event)
+// })
+
+
+///////////////////////////////////////Ignore for now
+
+// let temperature = document.getElementById("temperature").value
+// let colorIs = "green" //then change css to represent this
+
+
+document.getElementById("results").className = "hot"
+
+
+
+// let converted = 0;
+// if (selectedRadio === "celcius") {
+//   converted = toCelcius(temperature);
+//   if (converted > 32)
+//   colorIs = "red" //redefined from green above
+// } else {
+//   converted = toFahrenheit(temperature);
+//   if (converted > 90)
+//   colorIs = "red" //redefined from green above
+// }
+
+// outputEL.innerHTML = 'converted temp is ${converted}';
+
+
