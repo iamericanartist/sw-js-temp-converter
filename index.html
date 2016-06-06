@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Temperature Converter</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<h1>Temperature Converter</h1>
+
+	<fieldset>
+		<legend>Convert Your Temperature Here</legend>
+
+		<label>
+      <p>Please enter temperature to convert</p>
+  		<input id="userInput" type="number" name="inputValue"  placeholder=" ie. 45 ">
+    </label>
+    <hr/>
+
+	  <label>
+      <input id="fahrButton" type="radio" name="temp" value="Fahrenheit"> to &degFahrenheit
+    </label>
+
+	  <label>
+      <input id="celButton" type="radio" name="temp" value="Celsius"> to &degCelsius
+    </label>
+    <hr/> 
+
+    <button id="converter" type="submitButton">Click me to convert!</button> 
+		
+    <button id="buttonReset" type="reset" name="clearButton">Clear Form</button>
+
+	</fieldset>
+  <h3>
+	<div id="results">Your Conversion Results:
+	</div>
+  </h3>
+<script src="converter.js"></script>
+</body>
+</html>
+
