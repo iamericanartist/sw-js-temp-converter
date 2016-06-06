@@ -7,19 +7,31 @@ var choice;
 var answer;
 
 var button = document.getElementById("converter");    // Reference to the button element in the DOM
-
+var buttonReset = document.getElementById("buttonReset");    // Reference to the button Reset element in the DOM
+var resultsDiv = document.getElementById("results");
 
 function determine () {     //This function should determine which conversion should happen based on which radio button is selected.
   input = document.getElementById("userInput").value;
     console.log("INPUT >>>", input);
+    resultsDiv.innerHTML = '';
   if (elFahrButton.checked === true) {
-    choice = "Fahrenheit";
+    /////////////////////////////////// choice = "Fahrenheit";
     answer = toFahrenheit(input);
+    if (answer > 90){
+      resultsDiv.innerHTML += `<div class="itsHot">YO ITS HOT`;
+    } else if (answer < 32) {
+      resultsDiv.innerHTML += `<div class="itsCold">BRRRRR ITS COLD`;
+    }
   } else {    //if one is checked the other is not and vice versa
-    choice = "Celsius";
+    /////////////////////////////////// choice = "Celsius";
     answer = toCelsius(input);
+    if (answer > 32){
+      resultsDiv.innerHTML += `<div class="itsHot">YO ITS HAWT`;
+    } else if (answer < 0) {
+      resultsDiv.innerHTML += `<div class="itsCold">BRRRRR ITS COLD`;
+    }
   }
-document.getElementById("results").innerHTML = `Our converted temperature is ${answer}`;
+  resultsDiv.innerHTML += `Our converted temperature is ${answer} &deg</div>`;
 }
 
 function toFahrenheit (input) {
@@ -27,12 +39,12 @@ function toFahrenheit (input) {
   console.log("Converted Fahrenheit value is ", temp);
   return temp;
 }
-
 function toCelsius (input) {
   temp = (input - 32) / 1.8;
   console.log("Converted Celsius value is ", temp);
   return temp;
 }
+
 
 function enterKeyPress(event) {
   // console.log("event", event );
@@ -41,37 +53,22 @@ function enterKeyPress(event) {
   } 
 }
 
+function cleanUp() {
+  console.log("event asdf asfd", event );
+  document.getElementById("userInput").value = "";
+  document.getElementById("fahrButton").checked = false;
+  document.getElementById("celButton").checked = false;
+  resultsDiv.innerHTML = "Your Conversion Results";
+}
+
 button.addEventListener("click", determine);
+buttonReset.addEventListener("click", cleanUp);
 window.addEventListener("keypress", enterKeyPress); 
 
 
+
+///////////////////////////////////////Ignore for now
 // To see which key is being clicked
 // document.getElementById("userInput").addEventListener("keydown", function(event){
 //   console.log(event)
 // })
-
-
-///////////////////////////////////////Ignore for now
-
-// let temperature = document.getElementById("temperature").value
-// let colorIs = "green" //then change css to represent this
-
-
-document.getElementById("results").className = "hot"
-
-
-
-// let converted = 0;
-// if (selectedRadio === "celcius") {
-//   converted = toCelcius(temperature);
-//   if (converted > 32)
-//   colorIs = "red" //redefined from green above
-// } else {
-//   converted = toFahrenheit(temperature);
-//   if (converted > 90)
-//   colorIs = "red" //redefined from green above
-// }
-
-// outputEL.innerHTML = 'converted temp is ${converted}';
-
-
